@@ -22,12 +22,11 @@ class ChatBotController extends Controller
 
     public function post(Request $request)
     {
-        $messaging_events = $request->body->entry[0]->messaging;
-        for ($i=0; $i < sizeof($messaging_events); $i++) { 
-            $event = $messaging_events[i];
-            $sender = $event->sender->id;
-            if ($event->message && $event->message->text) {
-                $data = ['text' => $event->message->text];
+        $messaging_events = $request->all()['entry'][0]['messaging'];
+        foreach ($messaging_events as $event) {
+            $sender = $event['sender']['id'];
+            if ($event['message'] && $event['message']['text']) {
+                $data = ['text' => $event['message']['text']];
                 $client = new \GuzzleHttp\Client();
                 $res = $client->request('POST', 'https://graph.facebook.com/v2.6/me/messages', [
                     'query' => ['access_token' => env('CHATPOT_PAGE_ACCESS_TOKEN')],

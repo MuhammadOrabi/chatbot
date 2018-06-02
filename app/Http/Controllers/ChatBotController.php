@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 class ChatBotController extends Controller
 {
-    public function get(Requst $request)
+    public function get(Request $request)
     {
         $verifycode = env('CHATPOT_VERIFY_TOKEN');
-        return response()->status(200);
+        return response('success', 200);
     }
 
-    public function post(Requst $request)
+    public function post(Request $request)
     {
         // 
     }

@@ -22,7 +22,9 @@ class ChatBotController extends Controller
 
     public function post(Request $request)
     {
-        // 
+        $body = $request->body;
+        return response()->json($body);
+        
     }
 
     public function handleMessage($sender_psid, $received_message)

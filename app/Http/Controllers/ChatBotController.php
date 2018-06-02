@@ -30,7 +30,7 @@ class ChatBotController extends Controller
                 $data = ['text' => $event->message->text];
                 $client = new \GuzzleHttp\Client();
                 $res = $client->request('POST', 'https://graph.facebook.com/v2.6/me/messages', [
-                    'query' => ['access_token' => env('CHATPOT_PAGE_ACC,ESS_TOKEN')],
+                    'query' => ['access_token' => env('CHATPOT_PAGE_ACCESS_TOKEN')],
                     'json' => [
                         'recipient' => ['id' => $sender],
                         'message' => $data

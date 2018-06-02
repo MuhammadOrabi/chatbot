@@ -9,14 +9,14 @@ class ChatBotController extends Controller
     public function get(Request $request)
     {
         $VERIFY_TOKEN = env('CHATPOT_VERIFY_TOKEN');
-        $mode = $request->query('hub.mode');
-        $token = $request->query('hub.verify_token');
-        $challenge = $request->query('hub.challenge');
+        $mode = $request->query('hub_mode');
+        $token = $request->query('hub_verify_token');
+        $challenge = $request->query('hub_challenge');
         abort_if(! $mode && $token, 404);
         if ($mode === 'subscribe' && $token === $VERIFY_TOKEN) {
             return response($challenge, 200);
         } else {
-            return response('failed', 403);            
+            return response($mode, 403);            
         }
     }
 

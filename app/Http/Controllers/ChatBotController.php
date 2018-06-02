@@ -12,9 +12,9 @@ class ChatBotController extends Controller
         $mode = $request->query('hub.mode');
         $token = $request->query('hub.verify_token');
         $challenge = $request->query('hub.challenge');
+        return response($challenge, 200);
         abort_if(! $mode && $token, 404);
-        if ($token === $VERIFY_TOKEN) {
-            return response($challenge, 200);
+        if ($mode === 'subscribe' && $token === $VERIFY_TOKEN) {
         } else {
             return response('failed', 403);            
         }
